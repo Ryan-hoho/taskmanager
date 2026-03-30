@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
+import Clients from './pages/Clients';
 import Tasks from './pages/Tasks';
 
 function App() {
@@ -10,10 +11,13 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
+        <Route path="/" element={<Login />} />  // home page
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/tasks" element={<Tasks />} />
+        <Route path="/clients" element={<Clients />} />
+
       </Routes>
     </Router>
   );
