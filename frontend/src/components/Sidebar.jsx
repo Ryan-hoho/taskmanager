@@ -1,5 +1,5 @@
 import { useNavigate, useLocation } from 'react-router-dom';
-import { LayoutDashboard, ClipboardList, FileText, Users, UserCircle, Plus } from 'lucide-react';
+import { ClipboardList,Users, UserCircle, Plus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 const NAV_ITEMS = [
