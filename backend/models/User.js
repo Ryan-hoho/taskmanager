@@ -3,11 +3,20 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    firstname: { type: String, required: true },
+    middlename:{ type: String  },
+    lastname:{ type: String },
+    employeeID: { type: String, required: true, unique: true },
+    email:{ type: String, unique: true  },
     password: { type: String, required: true },
-    university: { type: String },
+    occupation:{ type: String },
+    gender:{ type: String  },
     address: { type: String },
+    manager: { type: String },
+    role : { type: String , default: 'employee'},
+
+
+
 });
 
 userSchema.pre('save', async function (next) {
