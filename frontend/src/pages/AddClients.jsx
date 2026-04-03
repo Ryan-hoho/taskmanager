@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import axiosInstance from '../axiosConfig';
 import ClientForm from '../components/ClientForm';
-import ClientList from '../components/ClientList';
 import { useAuth } from '../context/AuthContext';
 
 const Clients = () => {
