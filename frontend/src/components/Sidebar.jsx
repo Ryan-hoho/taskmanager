@@ -55,23 +55,21 @@ const Sidebar = () => {
       {/* 下半部：New Task 按鈕 */}
       <div className="flex flex-col gap-4 mt-6">
         <button
-          onClick={() => navigate('/Tasks')}
+          onClick={() => navigate('/AddTasks')}
           className="w-full rounded-2xl bg-[#1f4ed8] text-white py-1 font-medium shadow hover:bg-blue-700 transition flex items-center justify-center gap-2"
         >
           <Plus size={16} />
           New Task
         </button>
         <button
-          onClick={() => navigate('/Clients')}
+          onClick={() => navigate('/AddClients')}
           className="w-full rounded-2xl bg-[#1f4ed8] text-white py-1 font-medium shadow hover:bg-blue-700 transition flex items-center justify-center gap-2"
         >
           <Plus size={16} />
           New Client
         </button>
       </div>
-     
-    
-    
+  
     
     
     

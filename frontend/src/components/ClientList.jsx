@@ -1,5 +1,6 @@
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
+import { useNavigate } from 'react-router-dom';
 
 const STATUS_COLORS = {
   Active:   'bg-green-100 text-green-700',
@@ -9,6 +10,7 @@ const STATUS_COLORS = {
 
 const ClientList = ({ clients, setClients, setEditingClient }) => {
   const { user } = useAuth();
+  const navigate = useNavigate();
 
   const handleDelete = async (clientId) => {
     try {
@@ -42,7 +44,7 @@ const ClientList = ({ clients, setClients, setEditingClient }) => {
           
           <div className="mt-2">
             <button
-              onClick={() => setEditingClient(client)}
+              onClick={() =>  setEditingClient(client)}
               className="mr-2 bg-yellow-500 text-white px-4 py-2 rounded"
             >
               Edit

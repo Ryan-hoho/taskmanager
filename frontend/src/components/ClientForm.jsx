@@ -2,11 +2,13 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
 
+
 const STATUS_OPTIONS = ['Active', 'Inactive' ];
 
 
-const ClientForm = ({ clients, setClients, editingClient, setEditingClient }) => {
+const ClientForm = ({ clients, setClients, editingClient, setEditingClient, onClose  }) => {
   const { user } = useAuth();
+
   const [formData, setFormData] = useState({ 
     firstname: '', middlename: '', lastname: '', company: '', occupation: '', email: '', phone: '', clientStatus: 'Active'});
   const [statusOpen, setStatusOpen] = useState(false);
@@ -47,6 +49,8 @@ const ClientForm = ({ clients, setClients, editingClient, setEditingClient }) =>
       }
       setEditingClient(null);
       setFormData({ firstname: '', middlename: '', lastname: '', company: '', occupation: '', email: '', phone: '', clientStatus: 'Active' });
+   
+       onClose?.();
     } catch (error) {
       alert('Failed to save client.');
     }
