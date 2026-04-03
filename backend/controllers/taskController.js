@@ -1,9 +1,9 @@
 const Task =require('../models/Task');
 
-const getTasks = async (requestAnimationFrame,res) =>{
+const getTasks = async (req,res) =>{
 try {
 
-const tasks= await Task.find({ userId: requestAnimationFrame.user.Id });
+const tasks= await Task.find({ userId: req.user.id });
 res.json(tasks);
 
 } catch(error){
@@ -12,9 +12,9 @@ res.status(500).json({ message: error.message});
 
 };
 const addTask = async (req, res) => {
-    const { title, description, deadline } = req.body;
+    const { projectname,  company, contactmember, email, phone,description, startdate , deadline, priority } = req.body;
     try {
-        const task = await Task.create({ userId: req.user.id, title, description, deadline });
+        const task = await Task.create({ userId: req.user.id, projectname, company, contactmember, email, phone, description, startdate , deadline, priority });
         res.status(201).json(task);
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -23,15 +23,31 @@ const addTask = async (req, res) => {
 
 
 const updateTask = async (req, res) => {
-    const { title, description, completed, deadline } = req.body;
+    const { projectname,  company, contactmember, email, phone, description, startdate , deadline, priority, completed } = req.body;
     try {
         const task = await Task.findById(req.params.id);
         if (!task) return res.status(404).json({ message: 'Task not found' });
 
-        task.title = title || task.title;
+        task.projectname = projectname || task.projectname;
+        task.company = company || task.company;
+        task.contactmember = contactmember || task.contactmember;
+        task.email = email || task.email;
+        task.phone = phone || task.phone;
+        task.priority = priority || task.priority;
         task.description = description || task.description;
         task.completed = completed ?? task.completed;
+        task.startdate =startdate || task.startdate;
         task.deadline = deadline || task.deadline;
+
+
+
+
+
+
+
+
+
+
 
         const updatedTask = await task.save();
         res.json(updatedTask);

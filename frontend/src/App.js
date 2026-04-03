@@ -4,7 +4,9 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import Clients from './pages/Clients';
+import AddClients from './pages/AddClients';
 import Tasks from './pages/Tasks';
+import AddTasks from './pages/AddTasks';
 import Sidebar from './components/Sidebar';
 import RightPanel from './components/Rightpanel';
 
@@ -56,6 +58,22 @@ function App() {
           element={
             <DashboardLayout>
               <Clients />
+            </DashboardLayout>
+          }
+        />
+         <Route
+          path="/AddClients"
+          element={
+            <DashboardLayout>
+              <AddClients />
+            </DashboardLayout>
+          }
+        />
+        <Route
+          path="/AddTasks"
+          element={
+            <DashboardLayout>
+              <AddTasks />
             </DashboardLayout>
           }
         />
