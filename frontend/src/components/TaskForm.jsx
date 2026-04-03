@@ -5,6 +5,8 @@ import axiosInstance from '../axiosConfig';
 const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask,onClose }) => {
   const { user } = useAuth();
   const [formData, setFormData] = useState({ projectname:'', company:'', contactmember:'', email:'', phone:'',description:'', startdate:'' , deadline:'', priority:'' });
+  
+
 
   useEffect(() => {
     if (editingTask) {
@@ -14,11 +16,11 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask,onClose }) => {
         contactmember: editingTask.contactmember,
         email: editingTask.email,
         phone: editingTask.phone,
-        startdate: editingTask.startdate,
+        startdate: editingTask.startdate ? editingTask.startdate.substring(0, 10) : '',
         priority: editingTask.priority,
         
-        description: editingTask.description,
-        deadline: editingTask.deadline,
+        description: editingTask.description  ,
+        deadline: editingTask.deadline ? editingTask.deadline.substring(0, 10) : '',
       });
     } else {
       setFormData({ projectname:'', company:'', contactmember:'', email:'', phone:'',description:'', startdate:'' , deadline:'', priority:'' });
@@ -57,7 +59,7 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask,onClose }) => {
         value={formData.projectname}
         onChange={(e) => setFormData({ ...formData, projectname: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
-      />
+      required />
       <label className="block text-sm font-medium mb-1">Company :</label>
       <input
         type="text"
@@ -65,7 +67,7 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask,onClose }) => {
         value={formData.company}
         onChange={(e) => setFormData({ ...formData, company: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
-      />
+      required />
       <label className="block text-sm font-medium mb-1">Project owner :</label>
       <input
         type="text"
@@ -73,7 +75,7 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask,onClose }) => {
         value={formData.contactmember}
         onChange={(e) => setFormData({ ...formData, contactmember: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
-      />
+      required />
       <label className="block text-sm font-medium mb-1">Email :</label>
       
       
@@ -83,7 +85,7 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask,onClose }) => {
         value={formData.email}
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
-      />
+      required />
       <label className="block text-sm font-medium mb-1">Phone :</label>
       <input
         type="text"
@@ -97,13 +99,17 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask,onClose }) => {
 
       {/* //#加入選項 */}
       <label className="block text-sm font-medium mb-1">Priority :</label>
-      <input
-        type="text"
-        placeholder="priority"
+      <select
         value={formData.priority}
         onChange={(e) => setFormData({ ...formData, priority: e.target.value })}
-        className="w-full mb-4 p-2 border rounded"
-      />
+        className="w-full mb-4 p-2 border rounded">
+          <option value="">Select Priority</option>
+          <option value="High">🔴 High</option>
+          <option value="Medium">🟡 Medium</option>
+          <option value="Low">🟢 Low</option>
+        </select>
+      
+
 
       <label className="block text-sm font-medium mb-1"> Description :</label>
       <input
@@ -121,16 +127,17 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask,onClose }) => {
         value={formData.startdate}
         onChange={(e) => setFormData({ ...formData, startdate: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
-      />   
+      required/>   
       
       {/* # 加入due date 不可早於start date */}
       <label className="block text-sm font-medium mb-1"> Due Date :</label>
       <input
         type="date"
         value={formData.deadline}
+        min={formData.startdate}
         onChange={(e) => setFormData({ ...formData, deadline: e.target.value })}
         className="w-full mb-4 p-2 border rounded"
-      />
+      required/>
       <button type="submit" className="w-full bg-blue-600 text-white p-2 rounded">
         {editingTask ? 'Update Task' : 'Add Task'}
       </button>

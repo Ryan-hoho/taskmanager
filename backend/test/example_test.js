@@ -21,7 +21,7 @@ describe('AddTask Function Test', () => {
     // Mock request data
     const req = {
       user: { id: new mongoose.Types.ObjectId() },
-      body: { title: "New Task", description: "Task description", deadline: "2025-12-31" }
+      body: { projectname:'Test Project', company:'Test Company', contactmember:'Test Member', email:'test@test.com', phone:'0499999999',description:'Test Description', startdate:'2026-06-01' , deadline:'2026-07-01', priority:'High' }
     };
 
     // Mock task that would be created
@@ -55,7 +55,7 @@ describe('AddTask Function Test', () => {
     // Mock request data
     const req = {
       user: { id: new mongoose.Types.ObjectId() },
-      body: { title: "New Task", description: "Task description", deadline: "2025-12-31" }
+      body: { projectname:'Test Project', company:'Test Company', contactmember:'Test Member', email:'test@test.com', phone:'0499999999',description:'Test Description', startdate:'2026-06-01' , deadline:'2026-07-01', priority:'High' }
     };
 
     // Mock response object
@@ -85,10 +85,17 @@ describe('Update Function Test', () => {
     const taskId = new mongoose.Types.ObjectId();
     const existingTask = {
       _id: taskId,
-      title: "Old Task",
-      description: "Old Description",
+      projectname:'Test Project',
+      company:'Test Company',
+      contactmember:'Test Member',
+      email:'test@test.com',
+      phone:'0499999999',
+      description:'Test Description', 
+      startdate: new Date() , 
+      deadline:new Date(), 
+      priority:'High',
       completed: false,
-      deadline: new Date(),
+      
       save: sinon.stub().resolvesThis(), // Mock save method
     };
     // Stub Task.findById to return mock task
@@ -97,7 +104,7 @@ describe('Update Function Test', () => {
     // Mock request & response
     const req = {
       params: { id: taskId },
-      body: { title: "New Task", completed: true }
+      body: { projectname: "New Project", completed: true }
     };
     const res = {
       json: sinon.spy(), 
@@ -108,7 +115,7 @@ describe('Update Function Test', () => {
     await updateTask(req, res);
 
     // Assertions
-    expect(existingTask.title).to.equal("New Task");
+    expect(existingTask.projectname).to.equal("New Project");
     expect(existingTask.completed).to.equal(true);
     expect(res.status.called).to.be.false; // No error status should be set
     expect(res.json.calledOnce).to.be.true;
@@ -167,8 +174,8 @@ describe('GetTask Function Test', () => {
 
     // Mock task data
     const tasks = [
-      { _id: new mongoose.Types.ObjectId(), title: "Task 1", userId },
-      { _id: new mongoose.Types.ObjectId(), title: "Task 2", userId }
+      { _id: new mongoose.Types.ObjectId(), projectname: "Task 1", userId },
+      { _id: new mongoose.Types.ObjectId(), projectname: "Task 2", userId }
     ];
 
     // Stub Task.find to return mock tasks
