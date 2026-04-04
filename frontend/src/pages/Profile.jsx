@@ -41,7 +41,8 @@ const Profile = () => {
   const isEmployee = role === 'employee';
 
   const lockedFields = isEmployee
-    ? ['employeeID', 'occupation', 'gender', 'manager']
+    ? ['employeeID', 'occupation', 'gender', 'manager', 'department',
+      'team','jobTitle','employmentType','workLocation','employmentStatus',]
     : [];
 
   const isLocked = (field) => lockedFields.includes(field);
@@ -413,58 +414,78 @@ const Profile = () => {
 
             <div>
               <label className={labelClass}>Department</label>
-              <input
-                type="text"
-                name="department"
-                value={formData.department}
-                onChange={handleChange}
-                className={inputClass}
-              />
+              <div className='relative'>
+                <input
+                  type="text"
+                  name="department"
+                  value={formData.department}
+                  readOnly={isLocked('department')}
+                  onChange={handleChange}
+                  className={isLocked('department') ? lockedInputClass : inputClass}
+                />
+                {isLocked('department') && (
+                    <span className="absolute right-3 top-3 text-gray-400">🔒</span>
+                  )}
+                </div>
             </div>
 
             <div>
               <label className={labelClass}>Team</label>
-              <input
-                type="text"
-                name="team"
-                value={formData.team}
-                onChange={handleChange}
-                className={inputClass}
-              />
+              <div className='relative'>
+                <input
+                  type="text"
+                  name="team"
+                  value={formData.team}
+                  readOnly={isLocked('team')}
+                  onChange={handleChange}
+                  className={isLocked('team') ? lockedInputClass : inputClass}
+                />
+                {isLocked('team') && (
+                    <span className="absolute right-3 top-3 text-gray-400">🔒</span>
+                  )}
+              </div>
             </div>
 
             <div>
               <label className={labelClass}>Job Title</label>
-              <input
-                type="text"
-                name="jobTitle"
-                value={formData.jobTitle}
-                onChange={handleChange}
-                className={inputClass}
-              />
+               <div className='relative'> 
+                <input
+                  type="text"
+                  name="jobTitle"
+                  value={formData.jobTitle}
+                  onChange={handleChange}
+                  className={isLocked('jobTitle') ? lockedInputClass : inputClass}
+                />
+                {isLocked('jobTitle') && (
+                    <span className="absolute right-3 top-3 text-gray-400">🔒</span>
+                  )}
+                </div>
             </div>
 
             <div>
               <label className={labelClass}>Employment Type</label>
-              <select
-                type="text"
-                name="employmentType"
-                value={formData.employmentType}
-                onChange={handleChange}
-                className={inputClass}
-              >
-                <option value="">Select Type</option>
-                <option value="Fulltime">Full Time</option>
-                <option value="Parttime">Part Time</option>
-                <option value="Parttime">Casual</option>
-              </select>
+               < div className='relative'>
+                <select
+                  type="text"
+                  name="employmentType"
+                  value={formData.employmentType}
+                  disabled={isLocked('employmentType')}
+                  onChange={handleChange}
+                  className={`${inputClass} ${
+                    isLocked('employmentType')
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : ''
+                  }`}
+                >
+                  <option value="">Select Type</option>
+                  <option value="Fulltime">Full Time</option>
+                  <option value="Parttime">Part Time</option>
+                  <option value="Casual">Casual</option>
+                </select>
+                {isLocked('employmentType')}
+                </div>
             </div>
           </div>
-
-
-
-
-
 
 
 
@@ -490,28 +511,43 @@ const Profile = () => {
 
             <div>
               <label className={labelClass}>Work Location</label>
-              <input
-                type="text"
-                name="workLocation"
-                value={formData.workLocation}
-                onChange={handleChange}
-                className={inputClass}
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  name="workLocation"
+                  value={formData.workLocation}
+                  readOnly={isLocked('workLocation')}
+                  onChange={handleChange}
+                  className={isLocked('workLocation') ? lockedInputClass : inputClass}
+                />
+                {isLocked('workLocation') && (
+                    <span className="absolute right-3 top-3 text-gray-400">🔒</span>
+                  )}
+                </div>
             </div>
 
             <div>
               <label className={labelClass}>Employment Status</label>
-              <select
-                type="text"
-                name="employmentStatus"
-                value={formData.employmentStatus}
-                onChange={handleChange}
-                className={inputClass}
-              >
-                <option value="">Select Status</option>
-                <option value="Active">Active</option>
-                <option value="Inactive">Inactive</option>
-              </select>
+               <div className="relative">
+                <select
+                  
+                  name="employmentStatus"
+                  value={formData.employmentStatus}
+                  onChange={handleChange}
+                  disabled={isLocked('employmentStatus')}
+                  className={`${inputClass} ${
+                    isLocked('employmentStatus')
+                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                      : ''
+                  }`}
+                >
+                  <option value="">Select Status</option>
+                  <option value="Active">Active</option>
+                  <option value="Inactive">Inactive</option>
+                  {isLocked('employmentStatus') 
+                  }
+                </select>
+              </div>
             </div>
           </div>
         </section>

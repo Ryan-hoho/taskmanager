@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
+import { useNavigate } from 'react-router-dom';
+
 
 const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask,onClose }) => {
   const { user } = useAuth();
   const [formData, setFormData] = useState({ projectname:'', company:'', contactmember:'', email:'', phone:'',description:'', startdate:'' , deadline:'', priority:'' });
-  
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -44,8 +46,10 @@ const TaskForm = ({ tasks, setTasks, editingTask, setEditingTask,onClose }) => {
       setEditingTask(null);
       setFormData({ projectname:'', company:'', contactmember:'', email:'', phone:'',description:'', startdate:'' , deadline:'', priority:'' });
       onClose?.();
+      alert('Task added successfully!');
+      navigate('/tasks');
     } catch (error) {
-      alert('Failed to save task.');
+      alert('Failed to save task. Please try again!');
     }
   };
    //# 加入必填的標示,及錯誤視窗彈出(cus 也要做)
