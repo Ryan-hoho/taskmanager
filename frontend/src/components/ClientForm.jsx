@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import axiosInstance from '../axiosConfig';
+import { useNavigate } from 'react-router-dom';
 
 
 const STATUS_OPTIONS = ['Active', 'Inactive' ];
@@ -12,6 +13,7 @@ const ClientForm = ({ clients, setClients, editingClient, setEditingClient, onCl
   const [formData, setFormData] = useState({ 
     firstname: '', middlename: '', lastname: '', company: '', occupation: '', email: '', phone: '', clientStatus: 'Active'});
   const [statusOpen, setStatusOpen] = useState(false);
+  const navigate = useNavigate();
 
 
   useEffect(() => {
