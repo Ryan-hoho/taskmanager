@@ -51,6 +51,8 @@ const ClientForm = ({ clients, setClients, editingClient, setEditingClient, onCl
       setFormData({ firstname: '', middlename: '', lastname: '', company: '', occupation: '', email: '', phone: '', clientStatus: 'Active' });
    
        onClose?.();
+       alert('Task added successfully!');
+      navigate('/clients');
     } catch (error) {
       alert('Failed to save client.');
     }
