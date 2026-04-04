@@ -10,7 +10,7 @@ const STATUS_COLORS = {
 
 const ClientList = ({ clients, setClients, setEditingClient }) => {
   const { user } = useAuth();
-  const navigate = useNavigate();
+ 
 
   const handleDelete = async (clientId) => {
     try {
