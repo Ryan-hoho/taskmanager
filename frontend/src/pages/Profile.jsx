@@ -97,7 +97,7 @@ const Profile = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const response = await axiosInstance.put('/api/auth/profile', formData, {
+       await axiosInstance.put('/api/auth/profile', formData, {
         headers: { Authorization: `Bearer ${user.token}` },
       });
      
