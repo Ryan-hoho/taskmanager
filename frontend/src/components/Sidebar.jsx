@@ -68,6 +68,7 @@ const Sidebar = () => {
           <Plus size={16} />
           New Client
         </button>
+        
       </div>
   
     

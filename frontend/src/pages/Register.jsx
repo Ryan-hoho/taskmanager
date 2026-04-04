@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import axiosInstance from '../axiosConfig';
 
 const Register = () => {
-  const [formData, setFormData] = useState({ firstname: '', employeeID: '', password: '', role:'employee',});
+  const [formData, setFormData] = useState({ firstname: '', employeeID: '', password: '', email:'' });
   
-  const[roleOpen, setRoleOpen]=useState(false);
+  
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -93,40 +93,6 @@ const Register = () => {
                           onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                           className="w-full mb-4 p-2 border rounded"
                         />
-                        {/* Role 下拉選單 */}
-                        <div className="relative mb-4">
-                          <button
-                            type="button"
-                            onClick={() => setRoleOpen(!roleOpen)}
-                            className="w-full p-2 border rounded text-left flex justify-between items-center bg-white"
-                          >
-                            {/* ✅ 修正：條件寫反 + 移除空格 */}
-                            <span className="text-gray-800">
-                              {formData.role === 'employee' ? '👤 Employee' : '👑 Manager'}
-                            </span>
-                            <span className="text-gray-400 text-xs">{roleOpen ? '▲' : '▼'}</span>
-                          </button>
-                          {roleOpen && (
-                            <div className="absolute z-10 w-full bg-white border rounded shadow-lg mt-1">
-                              <div
-                                onClick={() => { setFormData({ ...formData, role: 'employee' }); setRoleOpen(false); }}
-                                className={`p-2 cursor-pointer hover:bg-blue-50 ${
-                                  formData.role === 'employee' ? 'bg-blue-100 font-semibold text-blue-700' : ''
-                                }`}
-                              >
-                                👤 Employee
-                              </div>
-                              <div
-                                onClick={() => { setFormData({ ...formData, role: 'manager' }); setRoleOpen(false); }}
-                                className={`p-2 cursor-pointer hover:bg-blue-50 ${
-                                  formData.role === 'manager' ? 'bg-blue-100 font-semibold text-blue-700' : ''
-                                }`}
-                              >
-                                👑 Manager
-                              </div>
-                            </div>
-                          )}
-                        </div>
                         
                       
 

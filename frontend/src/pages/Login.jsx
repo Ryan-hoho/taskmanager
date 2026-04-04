@@ -20,14 +20,20 @@ const Login = () => {
     try {
       const response = await axiosInstance.post('/api/auth/login', formData);
       login(response.data);
-      navigate('/clients');
+
+      if (response.data.role === 'admin') {
+      navigate('/AdminUser');
+    } else {
+      navigate('/clients'); }
+
+    
     } catch (error) {
       alert('Login failed. Please try again.');
     }
   };
 
   return (
-<div className="min-h-screen bg-[#eef2f7] flex items-center justify-center p-6">
+  <div className="min-h-screen bg-[#eef2f7] flex items-center justify-center p-6">
       <div className="w-full max-w-[1400px] min-h-[850px] bg-white rounded-[32px] overflow-hidden shadow-lg grid grid-cols-1 lg:grid-cols-2">
         
         {/* Left side */}
@@ -131,7 +137,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </div>
+  </div>
     
    
 

@@ -9,6 +9,7 @@ import Tasks from './pages/Tasks';
 import AddTasks from './pages/AddTasks';
 import Sidebar from './components/Sidebar';
 import RightPanel from './components/Rightpanel';
+import AdminUser from './pages/AdminUser';
 
 function DashboardLayout({ children }) {
   return (
@@ -66,6 +67,14 @@ function App() {
           element={
             <DashboardLayout>
               <AddClients />
+            </DashboardLayout>
+          }
+        />
+        <Route
+          path="/AdminUser"
+          element={
+            <DashboardLayout>
+              <AdminUser />
             </DashboardLayout>
           }
         />
