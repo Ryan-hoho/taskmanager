@@ -54,7 +54,7 @@ const ClientForm = ({ clients, setClients, editingClient, setEditingClient, onCl
    
        onClose?.();
        alert('Task added successfully!');
-      navigate('/clients');
+        navigate('/clients');
     } catch (error) {
       alert('Failed to save client.');
     }
