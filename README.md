@@ -185,7 +185,7 @@ This project uses **GitHub Actions** with a self-hosted runner deployed on AWS E
 | `PROD` | All production environment variables combined |
 
 
-## 🖥️ Server Configuration (AWS EC2)
+##  Server Configuration (AWS EC2)
  
 | Setting | Value |
 |---------|-------|
