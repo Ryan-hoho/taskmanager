@@ -7,9 +7,6 @@ const STATUS_COLORS = {
   Inactive: 'bg-gray-800 text-white border border-gray-700',
 };
 
-// ✅ 新增：Client ID 格式化，用 index 產生 C-001, C-002...
-const formatClientId = (index) => `C-${String(index + 1).padStart(3, '0')}`;
-
 
 const ClientList = ({ clients, setClients, setEditingClient }) => {
   const { user } = useAuth();
