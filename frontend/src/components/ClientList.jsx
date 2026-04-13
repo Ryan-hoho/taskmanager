@@ -7,6 +7,7 @@ const STATUS_COLORS = {
   Inactive: 'bg-gray-800 text-white border border-gray-700',
 };
 
+const formatClientId = (index) => `C-${String(index + 1).padStart(3, '0')}`;
 
 const ClientList = ({ clients, setClients, setEditingClient }) => {
   const { user } = useAuth();
@@ -24,40 +25,73 @@ const ClientList = ({ clients, setClients, setEditingClient }) => {
   };
 
   return (
-    <div>
-      {clients.map((client) => (
-        <div key={client._id} className="bg-gray-100 p-4 mb-4 rounded shadow">
-          <h2 className="font-bold">{client.firstname} {client.middlename} {client.lastname}</h2>
-          <span className={`text-xs px-2 py-1 rounded-full font-semibold ${STATUS_COLORS[client.clientStatus] || 'bg-gray-100 text-gray-600'}`}>
-                {client.clientStatus}
-          </span>
- 
-          {/* Details */}
-          <div className="text-sm text-gray-600 space-y-0.5">
-              {client.company    && <p>🏢 {client.company}</p>}
-              {client.occupation && <p>💼 {client.occupation}</p>}
-              {client.email      && <p>✉️ {client.email}</p>}
-              {client.phone      && <p>📞 {client.phone}</p>}
-          </div>
+    
+    <div className="overflow-x-auto rounded-lg shadow">
+      <table className="min-w-full bg-white text-sm">
 
+        {/*  新增：藍紫色表頭 */}
+        <thead>
+          <tr className="bg-indigo-200 text-gray-700 text-center">
+            <th className="px-4 py-3 font-medium">Client ID</th>
+            <th className="px-4 py-3 font-medium">Contact Name</th>
+            <th className="px-4 py-3 font-medium">Company</th>
+            <th className="px-4 py-3 font-medium">Occupation</th>
+            <th className="px-4 py-3 font-medium">Email</th>
+            <th className="px-6 py-3 font-medium">Actions</th>
+            <th className="px-4 py-3 font-medium">Status</th>
+          </tr>
+        </thead>
 
-          
-          <div className="mt-2">
-            <button
-              onClick={() =>  setEditingClient(client)}
-              className="mr-2 bg-yellow-500 text-white px-4 py-2 rounded"
+        {/* 修改：原本 div.map 改成 tbody > tr */}
+        <tbody>
+          {clients.map((client, index) => (
+            <tr
+              key={client._id}
+              className="border-b border-gray-100 text-center hover:bg-gray-50"
             >
-              Edit
-            </button>
-            <button
-              onClick={() => handleDelete(client._id)}
-              className="bg-red-500 text-white px-4 py-2 rounded"
-            >
-              Delete
-            </button>
-          </div>
-        </div>
-      ))}
+              {/* 新增：Client ID 欄 */}
+              <td className="px-4 py-3 text-gray-500">
+                {formatClientId(index)}
+              </td>
+
+              {/* 修改：原本 <h2> 改成 <td> */}
+              <td className="px-4 py-3 font-medium text-gray-800">
+                {client.firstname} {client.middlename} {client.lastname}
+              </td>
+
+              {/* 修改：原本在 Details div 裡，現在各自獨立成 <td> */}
+              <td className="px-4 py-3 text-gray-600">{client.company || '—'}</td>
+              <td className="px-4 py-3 text-gray-600">{client.occupation || '—'}</td>
+              <td className="px-4 py-3 text-gray-600">{client.email || '—'}</td>
+
+              {/* 修改：原本 Edit + Delete 分開，現在改成 Update + Delete 並排圓角按鈕 */}
+              <td className="px-4 py-3">
+                <div className="flex gap-2 justify-center">
+                  <button
+                    onClick={() => setEditingClient(client)}
+                    className="bg-slate-600 hover:bg-slate-700 text-white px-4 py-1.5 rounded-full text-xs font-semibold transition-colors"
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(client._id)}
+                    className="bg-red-400 hover:bg-red-500 text-white px-4 py-1.5 rounded-full text-xs font-semibold transition-colors"
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
+
+              {/* 修改：原本獨立 <span>，現在放進 <td> 並置中 */}
+              <td className="px-4 py-3">
+                <span className={`px-4 py-1.5 rounded-full text-xs font-semibold ${STATUS_COLORS[client.clientStatus] || 'bg-gray-100 text-gray-600'}`}>
+                  {client.clientStatus}
+                </span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
